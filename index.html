@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>SVG Percentage Donut Chart</title>
+  </head>
+
+  <style>
+  svg {
+    width: 200px;
+    height: 200px;
+  }
+  path {
+    fill: none;
+    stroke-width: 3;
+    transition: ease 300ms stroke-dasharray;
+  }
+  text {
+    text-anchor: middle;
+    font-size: .5em;
+  }
+  </style>
+
+  <body>
+    <svg viewBox="0 0 36 36" class="chart-svg">
+      <path
+        stroke="#ebc7c6"
+        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+      />
+      <path class="circle"
+        stroke="#ed514e"
+        stroke-dasharray="0, 100"
+        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+      />
+      <text x="18" y="20.35" class="percentage">-</text>
+    </svg>
+
+    <input type="number" class="input" min="0" max="100">
+  </body>
+
+  <script>
+    const circle     = document.querySelector('.circle');
+    const percentage = document.querySelector('.percentage');
+    const input      = document.querySelector('.input');
+    const update     = num => {
+      input.value = num;
+      circle.setAttribute('stroke-dasharray', `${num}, 100`);
+      percentage.innerHTML = `${num}%`
+    };
+    input.oninput = e => update(e.target.valueAsNumber);
+    update(70);
+  </script>
+</html>
